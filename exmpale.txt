@@ -46,3 +46,6 @@ class Database { // Singleton
 }
 
 module.exports = new Database();
+
+
+//create any encrypted key openssl rand -base64 32

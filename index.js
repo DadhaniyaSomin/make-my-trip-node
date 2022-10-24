@@ -7,7 +7,6 @@ const db = require('./config/database')
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 
-db.connect(process.env.DB_USERNAME, process.env.DB_PASSWORD);
 app.use(express.json());
 
 // Cross Origin Resource Sharing
@@ -24,8 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 //middleware
 app.use('/auth', require('./routes/auth.js'));
 app.use('/hotels', require('./routes/hotels.js'));
-
-
+app.use('/user', require('./routes/users.js'));
 
 app.all('*', (req, res) => {
   res.status(404);
@@ -50,6 +48,7 @@ app.use((err,req,res,next) => {
 })
 
 app.listen(port, () => {
+  db.connect(process.env.DB_USERNAME, process.env.DB_PASSWORD);
   console.log(`Example app listening at http://localhost:${port} ${process.env.DB_PASSWORD}`);
 });
 
